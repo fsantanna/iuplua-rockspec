@@ -67,7 +67,7 @@ Created `iuplua-examples-0.1-1.rockspec` for LuaRocks.
 
 1. [x] Create the rockspec file
 2. [x] Update root `README.md` with install instructions
-3. [ ] Test with `luarocks lint` (manual step)
+3. [x] Test with `luarocks lint`
 
 ## Phase 3: Future (out of scope for now)
 
