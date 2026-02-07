@@ -11,10 +11,10 @@ The Tecgraf team explored it but IUP's complex build system made
 it non-trivial. This project takes a practical approach: package
 the Lua examples first, then evolve the rockspec.
 
-## Phase 1: Examples (current)
+## Phase 1: Examples (done)
 
-Download all Lua examples from `iup.sourceforge.net/examples/Lua/`
-and organize them in the following directory tree:
+Downloaded all Lua examples from `iup.sourceforge.net/examples/Lua/`
+organized in the following directory tree:
 
 ```
 examples/
@@ -24,48 +24,50 @@ examples/
 │   └── 4-paint/          -- Ch.4: Simple Paint (6 examples)
 ├── 7gui/                 -- 7GUIs benchmark (7 examples)
 ├── basic/                -- Basic Guide to IupLua
-│   ├── output/           -- iup.Message, iup.Alarm
 │   ├── input/            -- iup.GetFile, iup.GetText, iup.GetParam
 │   ├── dialogs/          -- multiline, button, vbox, hbox, frame, tabs
-│   ├── timer/            -- timer1, idle1
-│   ├── list/             -- list1, selection, dblclick, dynamic
-│   ├── tree/             -- nested, testtree2, directory
+│   ├── timer/            -- timer1
+│   ├── list/             -- list1, listdlg
+│   ├── tree/             -- testtree2, testtree4, directory
 │   ├── menu/             -- simple-menu, menu
-│   └── plot/             -- plot1, multi, simple-plot, plot5
+│   ├── plot/             -- iupxplot, simple-plot
+│   └── iupx.lua          -- shared utility module
 └── elements/             -- 79 standalone per-widget examples
 ```
+
+Note: `basic/output/` was dropped (iup.Message/iup.Alarm examples
+were inline-only on the guide page, no downloadable files).
 
 ### Sources
 
 - Elements (79 files): `iup.sourceforge.net/examples/Lua/*.lua`
-- Tutorial: `iup.sourceforge.net/en/tutorial/` (linked .lua files)
-- 7GUIs: `iup.sourceforge.net/en/7gui/` (linked .lua files)
-- Basic Guide: `iup.sourceforge.net/en/basic/` (inline + linked)
+- Tutorial: `iup.sourceforge.net/examples/tutorial/`
+- 7GUIs: `iup.sourceforge.net/examples/Lua/7gui/`
+- Basic Guide: `iup.sourceforge.net/examples/Lua/misc/`
 
 ### Steps
 
-1. [ ] Download all 79 element examples into `examples/elements/`
-2. [ ] Download tutorial examples (Ch.2, Ch.3, Ch.4)
-3. [ ] Download 7GUI examples
-4. [ ] Download basic guide examples
-5. [ ] Add a `README.md` for `examples/` explaining the structure
+1. [x] Download all 79 element examples into `examples/elements/`
+2. [x] Download tutorial examples (Ch.2, Ch.3, Ch.4)
+3. [x] Download 7GUI examples
+4. [x] Download basic guide examples
+5. [x] Add a `README.md` for `examples/` explaining the structure
 
-## Phase 2: Rockspec
+## Phase 2: Rockspec (done)
 
-Create `iuplua-examples-<version>.rockspec` for LuaRocks.
+Created `iuplua-examples-0.1-1.rockspec` for LuaRocks.
 
 ### Approach
 
 - `build.type = "none"` (pure Lua examples, no compilation)
-- `external_dependencies`: IUP headers/libraries (iup, iuplua)
-- The rockspec installs the example files only
+- `copy_directories = { "examples" }`
 - Dependencies: `lua >= 5.1`
 
 ### Steps
 
-1. [ ] Create the rockspec file
-2. [ ] Update root `README.md` with install instructions
-3. [ ] Test with `luarocks lint`
+1. [x] Create the rockspec file
+2. [x] Update root `README.md` with install instructions
+3. [ ] Test with `luarocks lint` (manual step)
 
 ## Phase 3: Future (out of scope for now)
 
