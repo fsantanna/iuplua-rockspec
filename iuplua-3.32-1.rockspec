@@ -39,7 +39,7 @@ dependencies = {
 
 build = {
     type = "make",
-    build_command = "",
+    build_command = ":",
     install_target = "install",
     variables = {
         LIBDIR = "$(LIBDIR)",
