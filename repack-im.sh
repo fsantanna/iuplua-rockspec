@@ -69,23 +69,24 @@ install:
 		fi; \
 	done
 	ldconfig /usr/local/lib 2>/dev/null || true
-	install -d $(LIBDIR)
-	@# Install Lua bindings to LIBDIR, renaming:
-	@#   libimlua54.so -> imlua.so
-	for f in libimlua*.so; do \
-		dst=$$(echo $$f \
-			| sed 's/^lib//' \
-			| sed 's/[0-9][0-9]\.so$$/.so/'); \
-		install -m 755 $$f $(LIBDIR)/$$dst; \
-	done
-	@# Also keep originals in /usr/local/lib so the
-	@# dynamic linker resolves cross-module deps
+	@# Install Lua bindings to /usr/local/lib (originals)
 	for f in libimlua*.so; do \
 		if [ -f $$f ]; then \
 			install -m 755 $$f /usr/local/lib/; \
 		fi; \
 	done
 	ldconfig /usr/local/lib 2>/dev/null || true
+	@# Symlink short names in LIBDIR for require:
+	@#   imlua.so -> /usr/local/lib/libimlua54.so
+	@# Using symlinks (not copies) so the dynamic linker
+	@# sees one identity and avoids duplicate loading.
+	install -d $(LIBDIR)
+	for f in libimlua*.so; do \
+		dst=$$(echo $$f \
+			| sed 's/^lib//' \
+			| sed 's/[0-9][0-9]\.so$$/.so/'); \
+		ln -sf /usr/local/lib/$$f $(LIBDIR)/$$dst; \
+	done
 MAKEFILE
 
 echo "=== Creating ${OUT_TAR}"
