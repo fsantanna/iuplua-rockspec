@@ -30,7 +30,7 @@ supported_platforms = {
 }
 
 dependencies = {
-    "lua >= 5.1",
+    "lua >= 5.4, < 5.5",
     "iuplua == 3.32",
     "iuplua-cd == 3.32",
     "iuplua-im == 3.32",

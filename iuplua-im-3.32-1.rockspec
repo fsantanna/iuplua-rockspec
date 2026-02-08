@@ -27,19 +27,8 @@ supported_platforms = {
 }
 
 dependencies = {
-    "lua >= 5.1",
-    "iuplua >= 3.32",
-}
-
-external_dependencies = {
-    IUP = {
-        header = "iup.h",
-        library = "iup",
-    },
-    IM = {
-        header = "im.h",
-        library = "im",
-    },
+    "lua >= 5.4, < 5.5",
+    "iuplua == 3.32",
 }
 
 build = {
