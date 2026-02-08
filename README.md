@@ -12,6 +12,29 @@ IUP must be installed on your system:
   [sourceforge](https://sourceforge.net/projects/iup/files/)
 - **macOS**: Build from source
 
+### Linux: Download precompiled Lua bindings
+
+Download the Lua binding tarball for your Lua version
+(example for Lua 5.4, Linux kernel 5.15, 64-bit):
+
+```sh
+wget "https://sourceforge.net/projects/iup/files/3.32/Linux%20Libraries/Lua54/iup-3.32-Lua54_Linux515_64_lib.tar.gz/download" \
+    -O iup-3.32-Lua54_Linux515_64_lib.tar.gz
+```
+
+Extract and check the contents:
+
+```sh
+tar tzf iup-3.32-Lua54_Linux515_64_lib.tar.gz
+```
+
+Then verify with:
+
+```sh
+lua setup.lua --check
+sudo lua setup.lua --link
+```
+
 ## Packages
 
 | Rockspec | Description | External deps |
