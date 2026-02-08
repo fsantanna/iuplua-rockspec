@@ -1,7 +1,7 @@
 # iuplua-rockspec
 
-LuaRocks package for [IupLua](https://iup.sourceforge.net/) examples
-from the official Tecgraf/PUC-Rio documentation.
+LuaRocks packages for [IUP](https://iup.sourceforge.net/), a
+multi-platform GUI toolkit from Tecgraf/PUC-Rio.
 
 ## Prerequisites
 
@@ -12,10 +12,32 @@ IUP must be installed on your system:
   [sourceforge](https://sourceforge.net/projects/iup/files/)
 - **macOS**: Build from source
 
+## Packages
+
+| Rockspec | Description | External deps |
+|----------|-------------|---------------|
+| `iuplua` | Core IUP binding | libiup |
+| `iuplua-cd` | Canvas Draw | libiup, libcd |
+| `iuplua-im` | Image library | libiup, libim |
+| `iuplua-gl` | OpenGL canvas | libiup, libGL |
+| `iuplua-examples` | 132 Lua examples | (none) |
+
 ## Install
 
 ```sh
+luarocks install iuplua
 luarocks install iuplua-examples
+```
+
+## Setup
+
+After installing IUP on the system, use the setup helper
+to verify the installation and create symlinks so that
+`require "iuplua"` works:
+
+```sh
+lua setup.lua --check       # verify IUP libraries
+sudo lua setup.lua --link   # create symlinks in cpath
 ```
 
 ## What's Included

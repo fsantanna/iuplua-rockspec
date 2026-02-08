@@ -69,11 +69,39 @@ Created `iuplua-examples-0.1-1.rockspec` for LuaRocks.
 2. [x] Update root `README.md` with install instructions
 3. [x] Test with `luarocks lint`
 
-## Phase 3: Future (out of scope for now)
+## Phase 3: Rockspecs + Setup (done)
 
-- Full `iuplua` rockspec that wraps the C library build
-- Precompiled binary rocks per platform
-- Separate sub-packages (iup-core, iup-cd, iup-im, iup-gl)
+Created rockspecs for IUP and its sub-packages, plus a setup
+helper script.
+
+### Rockspecs
+
+| File | Package | External deps |
+|------|---------|---------------|
+| `iuplua-3.32-1.rockspec` | iuplua (core) | iup.h, libiup |
+| `iuplua-cd-3.32-1.rockspec` | iuplua-cd | + cd.h, libcd |
+| `iuplua-im-3.32-1.rockspec` | iuplua-im | + im.h, libim |
+| `iuplua-gl-3.32-1.rockspec` | iuplua-gl | + GL/gl.h, libGL |
+
+All use `build.type = "none"` with `external_dependencies`
+to validate the C libraries are installed. Sub-packages depend
+on `iuplua >= 3.32`.
+
+### Setup helper
+
+`setup.lua` -- verifies IUP installation and creates symlinks
+so `require "iuplua"` works:
+- `lua setup.lua --check` -- detect installed IUP libraries
+- `lua setup.lua --link`  -- create symlinks in Lua cpath
+
+### Steps
+
+1. [x] Create `iuplua-3.32-1.rockspec` (core)
+2. [x] Create `iuplua-cd-3.32-1.rockspec`
+3. [x] Create `iuplua-im-3.32-1.rockspec`
+4. [x] Create `iuplua-gl-3.32-1.rockspec`
+5. [x] Create `setup.lua` helper
+6. [x] Test with `luarocks lint`
 
 ## References
 
