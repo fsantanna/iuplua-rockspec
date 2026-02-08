@@ -49,17 +49,16 @@ The rockspec downloads a combined tarball (core + Lua
 bindings) from GitHub releases. To create it:
 
 ```sh
+git pull origin main
 bash repack.sh 54 Linux515_64
+gh release create v3.32 iuplua-3.32-Lua54_Linux515_64.tar.gz
 ```
 
-This downloads both Tecgraf tarballs from SourceForge,
-combines them, and produces
-`iuplua-3.32-Lua54_Linux515_64.tar.gz`.
-
-Then upload as a GitHub release:
+### Testing locally
 
 ```sh
-gh release create v3.32 iuplua-3.32-Lua54_Linux515_64.tar.gz
+sudo luarocks make iuplua-3.32-1.rockspec
+lua -e 'require "iuplua"; print("OK")'
 ```
 
 ### Manual alternative (without LuaRocks)
