@@ -3,68 +3,70 @@
 LuaRocks packages for [IUP](https://iup.sourceforge.net/), a
 multi-platform GUI toolkit from Tecgraf/PUC-Rio.
 
-## Prerequisites
+## Install (user)
 
-IUP must be installed on your system:
-- **Linux**: Install via your package manager or from
-  [sourceforge](https://sourceforge.net/projects/iup/files/)
-- **Windows**: Download binaries from
-  [sourceforge](https://sourceforge.net/projects/iup/files/)
-- **macOS**: Build from source
+```sh
+sudo luarocks install iuplua
+```
+
+That's it. This installs the IUP core C libraries and the
+Lua 5.4 bindings. Then:
+
+```sh
+lua -e 'require "iuplua"; print("OK")'
+```
 
 ## Packages
 
-| Rockspec | Description | External deps |
-|----------|-------------|---------------|
-| `iuplua` | Core IUP binding | libiup |
-| `iuplua-cd` | Canvas Draw | libiup, libcd |
-| `iuplua-im` | Image library | libiup, libim |
-| `iuplua-gl` | OpenGL canvas | libiup, libGL |
-| `iuplua-examples` | 132 Lua examples | (none) |
-| `iuplua-all` | Complete bundle (all above) | all |
+| Rockspec | Description |
+|----------|-------------|
+| `iuplua` | Core + all bindings (CD, IM, GL, etc.) |
+| `iuplua-examples` | 132 Lua examples |
 
-## Install
+## Examples
 
 ```sh
-luarocks install iuplua-all    # everything
-```
-
-Or install individual packages:
-
-```sh
-luarocks install iuplua
 luarocks install iuplua-examples
-```
-
-## Setup
-
-After installing IUP on the system, use the setup helper
-to verify the installation and create symlinks so that
-`require "iuplua"` works:
-
-```sh
-lua setup.lua --check       # verify IUP libraries
-sudo lua setup.lua --link   # create symlinks in cpath
-```
-
-## What's Included
-
-132 Lua examples organized into:
-
-| Directory            | Description                        | Count |
-|----------------------|------------------------------------|-------|
-| `examples/tutorial/` | Progressive tutorial (Ch.2-4)     | 23    |
-| `examples/7gui/`     | 7GUIs benchmark                   | 7     |
-| `examples/basic/`    | Basic Guide to IupLua             | 23    |
-| `examples/elements/` | Per-widget standalone examples    | 79    |
-
-See [examples/README.md](examples/README.md) for the full
-directory structure.
-
-## Running Examples
-
-```sh
 lua examples/elements/button.lua
+```
+
+132 examples organized into:
+
+| Directory            | Description                     | Count |
+|----------------------|---------------------------------|-------|
+| `examples/tutorial/` | Progressive tutorial (Ch.2-4)  | 23    |
+| `examples/7gui/`     | 7GUIs benchmark                | 7     |
+| `examples/basic/`    | Basic Guide to IupLua          | 23    |
+| `examples/elements/` | Per-widget standalone examples | 79    |
+
+See [examples/README.md](examples/README.md) for details.
+
+## For maintainers
+
+### Repackaging a new IUP release
+
+The rockspec downloads a combined tarball (core + Lua
+bindings) from GitHub releases. To create it:
+
+```sh
+bash repack.sh 54 Linux515_64
+```
+
+This downloads both Tecgraf tarballs from SourceForge,
+combines them, and produces
+`iuplua-3.32-Lua54_Linux515_64.tar.gz`.
+
+Then upload as a GitHub release:
+
+```sh
+gh release create v3.32 iuplua-3.32-Lua54_Linux515_64.tar.gz
+```
+
+### Manual alternative (without LuaRocks)
+
+```sh
+lua setup.lua --check
+sudo lua setup.lua --link
 ```
 
 ## References

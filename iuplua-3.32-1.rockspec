@@ -3,24 +3,24 @@ package = "iuplua"
 version = "3.32-1"
 
 source = {
-    url = "git+https://github.com/fsantanna/iuplua-rockspec.git",
-    tag = "v3.32",
+    url = "https://github.com/fsantanna"
+        .. "/iuplua-rockspec/releases/download"
+        .. "/v3.32"
+        .. "/iuplua-3.32-Lua54_Linux515_64.tar.gz",
+    dir = "iuplua-3.32",
 }
 
 description = {
-    summary = "IUP Lua binding - portable GUI toolkit (Tecgraf/PUC-Rio)",
+    summary = "IUP Lua binding - portable GUI toolkit"
+        .. " (Tecgraf/PUC-Rio)",
     detailed = [[
-        IUP is a multi-platform toolkit for building graphical
-        user interfaces. It uses native controls and has a
-        simple API.
+        IUP is a multi-platform toolkit for building
+        graphical user interfaces. It uses native controls
+        and has a simple API.
 
-        This rockspec validates that IUP is installed on the
-        system and makes `require "iuplua"` discoverable
-        through LuaRocks.
-
-        IUP must be installed separately. Precompiled binaries
-        are available at:
-        https://sourceforge.net/projects/iup/files/
+        This rockspec installs precompiled IUP core
+        libraries and Lua 5.4 bindings from the official
+        Tecgraf distribution. No manual setup required.
     ]],
     homepage = "https://iup.sourceforge.net/",
     license = "MIT",
@@ -30,21 +30,18 @@ description = {
 }
 
 supported_platforms = {
-    "linux", "windows",
+    "linux",
 }
 
 dependencies = {
-    "lua >= 5.1",
-}
-
-external_dependencies = {
-    IUP = {
-        header = "iup.h",
-        library = "iup",
-    },
+    "lua >= 5.4, < 5.5",
 }
 
 build = {
-    type = "none",
-    copy_directories = { "examples" },
+    type = "make",
+    build_command = "",
+    install_target = "install",
+    variables = {
+        LIBDIR = "$(LIBDIR)",
+    },
 }
