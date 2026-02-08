@@ -73,6 +73,7 @@ CORE_LIBS = \
 	libiuptuio.so \
 	libiupweb.so
 
+.PHONY: install
 install:
 	install -d /usr/local/lib
 	for f in $(CORE_LIBS); do \
