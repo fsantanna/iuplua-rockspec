@@ -3,27 +3,33 @@ package = "iuplua-im"
 version = "3.32-1"
 
 source = {
-    url = "git+https://github.com/fsantanna/iuplua-rockspec.git",
-    tag = "v3.32",
+    url = "https://github.com/fsantanna"
+        .. "/iuplua-rockspec/releases/download"
+        .. "/v3.32"
+        .. "/iuplua-im-3.32-Lua54_Linux515_64.tar.gz",
+    dir = "iuplua-im-3.32",
 }
 
 description = {
-    summary = "IUP Image library binding for Lua (Tecgraf/PUC-Rio)",
+    summary = "IM (Image) binding for Lua"
+        .. " (Tecgraf/PUC-Rio)",
     detailed = [[
-        IM (Image) integration for IUP. Provides image loading,
-        processing, and display on IUP dialogs.
+        IM (Image) integration for IUP. Provides image
+        loading, processing, and display on IUP dialogs.
 
-        Requires IUP and IM installed on the system.
-        Precompiled binaries available at:
-        https://sourceforge.net/projects/iup/files/
+        This rockspec installs precompiled IM core libraries
+        (v3.15) and Lua 5.4 bindings from the official
+        Tecgraf distribution.
     ]],
-    homepage = "https://iup.sourceforge.net/",
+    homepage = "https://im.sourceforge.net/",
     license = "MIT",
-    labels = { "iup", "im", "image", "tecgraf" },
+    labels = {
+        "iup", "im", "image", "tecgraf",
+    },
 }
 
 supported_platforms = {
-    "linux", "windows",
+    "linux",
 }
 
 dependencies = {
@@ -32,5 +38,10 @@ dependencies = {
 }
 
 build = {
-    type = "none",
+    type = "make",
+    build_command = ":",
+    install_target = "install",
+    variables = {
+        LIBDIR = "$(LIBDIR)",
+    },
 }

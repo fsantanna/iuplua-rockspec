@@ -3,27 +3,33 @@ package = "iuplua-cd"
 version = "3.32-1"
 
 source = {
-    url = "git+https://github.com/fsantanna/iuplua-rockspec.git",
-    tag = "v3.32",
+    url = "https://github.com/fsantanna"
+        .. "/iuplua-rockspec/releases/download"
+        .. "/v3.32"
+        .. "/iuplua-cd-3.32-Lua54_Linux515_64.tar.gz",
+    dir = "iuplua-cd-3.32",
 }
 
 description = {
-    summary = "IUP Canvas Draw binding for Lua (Tecgraf/PUC-Rio)",
+    summary = "CD (Canvas Draw) binding for Lua"
+        .. " (Tecgraf/PUC-Rio)",
     detailed = [[
         CD (Canvas Draw) integration for IUP. Provides 2D
         drawing primitives on IUP canvases.
 
-        Requires IUP and CD installed on the system.
-        Precompiled binaries available at:
-        https://sourceforge.net/projects/iup/files/
+        This rockspec installs precompiled CD core libraries
+        (v5.14) and Lua 5.4 bindings from the official
+        Tecgraf distribution.
     ]],
-    homepage = "https://iup.sourceforge.net/",
+    homepage = "https://cd.sourceforge.net/",
     license = "MIT",
-    labels = { "iup", "cd", "canvas", "drawing", "tecgraf" },
+    labels = {
+        "iup", "cd", "canvas", "drawing", "tecgraf",
+    },
 }
 
 supported_platforms = {
-    "linux", "windows",
+    "linux",
 }
 
 dependencies = {
@@ -32,5 +38,10 @@ dependencies = {
 }
 
 build = {
-    type = "none",
+    type = "make",
+    build_command = ":",
+    install_target = "install",
+    variables = {
+        LIBDIR = "$(LIBDIR)",
+    },
 }
