@@ -5,32 +5,45 @@ multi-platform GUI toolkit from Tecgraf/PUC-Rio.
 
 ## Prerequisites
 
-IUP must be installed on your system:
-- **Linux**: Install via your package manager or from
-  [sourceforge](https://sourceforge.net/projects/iup/files/)
-- **Windows**: Download binaries from
-  [sourceforge](https://sourceforge.net/projects/iup/files/)
-- **macOS**: Build from source
+The IUP core C libraries must be installed on your system
+before using the Lua bindings.
 
-### Linux: Download precompiled Lua bindings
+### Step 1: Install IUP core C libraries
 
-Download the Lua binding tarball for your Lua version
-(example for Lua 5.4, Linux kernel 5.15, 64-bit):
+Download and install the main IUP libraries
+(example for Linux kernel 5.15, 64-bit):
+
+```sh
+wget "https://sourceforge.net/projects/iup/files/3.32/Linux%20Libraries/iup-3.32_Linux515_64_lib.tar.gz/download" \
+    -O iup-3.32_Linux515_64_lib.tar.gz
+tar xzf iup-3.32_Linux515_64_lib.tar.gz
+sudo bash install
+```
+
+### Step 2: Install Lua bindings via LuaRocks
+
+```sh
+luarocks install iuplua
+```
+
+This downloads the precompiled Lua 5.4 bindings from
+SourceForge and installs all `.so` modules.
+
+### Step 3: Verify
+
+```sh
+lua -e 'require "iuplua"; print("OK")'
+lua examples/all.lua
+```
+
+### Manual alternative (without LuaRocks)
+
+Download the Lua binding tarball directly:
 
 ```sh
 wget "https://sourceforge.net/projects/iup/files/3.32/Linux%20Libraries/Lua54/iup-3.32-Lua54_Linux515_64_lib.tar.gz/download" \
     -O iup-3.32-Lua54_Linux515_64_lib.tar.gz
-```
-
-Extract and check the contents:
-
-```sh
-tar tzf iup-3.32-Lua54_Linux515_64_lib.tar.gz
-```
-
-Then verify with:
-
-```sh
+tar xzf iup-3.32-Lua54_Linux515_64_lib.tar.gz
 lua setup.lua --check
 sudo lua setup.lua --link
 ```
