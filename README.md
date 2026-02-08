@@ -21,8 +21,15 @@ IUP must be installed on your system:
 | `iuplua-im` | Image library | libiup, libim |
 | `iuplua-gl` | OpenGL canvas | libiup, libGL |
 | `iuplua-examples` | 132 Lua examples | (none) |
+| `iuplua-all` | Complete bundle (all above) | all |
 
 ## Install
+
+```sh
+luarocks install iuplua-all    # everything
+```
+
+Or install individual packages:
 
 ```sh
 luarocks install iuplua

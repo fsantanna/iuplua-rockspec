@@ -82,6 +82,7 @@ helper script.
 | `iuplua-cd-3.32-1.rockspec` | iuplua-cd | + cd.h, libcd |
 | `iuplua-im-3.32-1.rockspec` | iuplua-im | + im.h, libim |
 | `iuplua-gl-3.32-1.rockspec` | iuplua-gl | + GL/gl.h, libGL |
+| `iuplua-all-3.32-1.rockspec` | iuplua-all (bundle) | all above |
 
 All use `build.type = "none"` with `external_dependencies`
 to validate the C libraries are installed. Sub-packages depend
@@ -101,7 +102,8 @@ so `require "iuplua"` works:
 3. [x] Create `iuplua-im-3.32-1.rockspec`
 4. [x] Create `iuplua-gl-3.32-1.rockspec`
 5. [x] Create `setup.lua` helper
-6. [x] Test with `luarocks lint`
+6. [x] Create `iuplua-all-3.32-1.rockspec` (bundle)
+7. [x] Test with `luarocks lint`
 
 ## References
 
