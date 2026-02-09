@@ -21,6 +21,8 @@ description = {
         This rockspec installs precompiled IUP core
         libraries and Lua 5.4 bindings from the official
         Tecgraf distribution. No manual setup required.
+
+        This rock was created with AI assistance.
     ]],
     homepage = "https://iup.sourceforge.net/",
     license = "MIT",

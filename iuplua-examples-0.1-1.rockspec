@@ -16,6 +16,8 @@ description = {
         standalone examples.
 
         IUP must be installed separately on your system.
+
+        This rock was created with AI assistance.
     ]],
     homepage = "https://github.com/fsantanna/iuplua-rockspec",
     license = "MIT",

@@ -20,6 +20,8 @@ description = {
         This rockspec installs precompiled CD core libraries
         (v5.14) and Lua 5.4 bindings from the official
         Tecgraf distribution.
+
+        This rock was created with AI assistance.
     ]],
     homepage = "https://cd.sourceforge.net/",
     license = "MIT",

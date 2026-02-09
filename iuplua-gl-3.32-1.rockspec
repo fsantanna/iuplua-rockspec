@@ -16,6 +16,8 @@ description = {
         Requires IUP and OpenGL installed on the system.
         Precompiled binaries available at:
         https://sourceforge.net/projects/iup/files/
+
+        This rock was created with AI assistance.
     ]],
     homepage = "https://iup.sourceforge.net/",
     license = "MIT",

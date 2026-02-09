@@ -20,6 +20,8 @@ description = {
         This rockspec installs precompiled IM core libraries
         (v3.15) and Lua 5.4 bindings from the official
         Tecgraf distribution.
+
+        This rock was created with AI assistance.
     ]],
     homepage = "https://im.sourceforge.net/",
     license = "MIT",

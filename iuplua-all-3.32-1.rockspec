@@ -17,6 +17,8 @@ description = {
         IUP, CD, IM, and OpenGL must be installed separately.
         Precompiled binaries available at:
         https://sourceforge.net/projects/iup/files/
+
+        This rock was created with AI assistance.
     ]],
     homepage = "https://iup.sourceforge.net/",
     license = "MIT",
