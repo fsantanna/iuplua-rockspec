@@ -51,13 +51,7 @@ echo "=== Adding Makefile"
 cat > "${OUT_DIR}/Makefile" << 'MAKEFILE'
 # Makefile for iuplua LuaRocks rockspec.
 # Installs IUP core libs to /usr/local/lib and
-# Lua binding .so files to $(LIBDIR).
-#
-# Variables set by LuaRocks:
-#   LIBDIR  - Lua C module directory
-#   PREFIX  - install prefix
-
-LIBDIR ?= /usr/local/lib/lua/5.4
+# Lua binding symlinks to /usr/local/lib/lua/5.4.
 
 CORE_LIBS = \
 	libiup.so \
@@ -94,16 +88,18 @@ install:
 		fi; \
 	done
 	ldconfig /usr/local/lib 2>/dev/null || true
-	@# Symlink short names in LIBDIR for require:
+	@# Symlink short names in Lua cpath for require:
 	@#   iuplua.so -> /usr/local/lib/libiuplua54.so
-	@# Using symlinks (not copies) so the dynamic linker
-	@# sees one identity and avoids duplicate loading.
-	install -d $(LIBDIR)
+	@# Symlinks bypass luarocks deploy (which dereferences)
+	@# and prevent duplicate library loading by the
+	@# dynamic linker.
+	install -d /usr/local/lib/lua/5.4
 	for f in libiuplua*.so; do \
 		dst=$$(echo $$f \
 			| sed 's/^lib//' \
 			| sed 's/[0-9][0-9]\.so$$/.so/'); \
-		ln -sf /usr/local/lib/$$f $(LIBDIR)/$$dst; \
+		ln -sf /usr/local/lib/$$f \
+			/usr/local/lib/lua/5.4/$$dst; \
 	done
 MAKEFILE
 

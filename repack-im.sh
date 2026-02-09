@@ -52,12 +52,7 @@ echo "=== Adding Makefile"
 cat > "${OUT_DIR}/Makefile" << 'MAKEFILE'
 # Makefile for iuplua-im LuaRocks rockspec.
 # Installs IM core libs to /usr/local/lib and
-# Lua binding .so files to $(LIBDIR).
-#
-# Variables set by LuaRocks:
-#   LIBDIR  - Lua C module directory
-
-LIBDIR ?= /usr/local/lib/lua/5.4
+# Lua binding symlinks to /usr/local/lib/lua/5.4.
 
 .PHONY: install
 install:
@@ -76,16 +71,18 @@ install:
 		fi; \
 	done
 	ldconfig /usr/local/lib 2>/dev/null || true
-	@# Symlink short names in LIBDIR for require:
+	@# Symlink short names in Lua cpath for require:
 	@#   imlua.so -> /usr/local/lib/libimlua54.so
-	@# Using symlinks (not copies) so the dynamic linker
-	@# sees one identity and avoids duplicate loading.
-	install -d $(LIBDIR)
+	@# Symlinks bypass luarocks deploy (which dereferences)
+	@# and prevent duplicate library loading by the
+	@# dynamic linker.
+	install -d /usr/local/lib/lua/5.4
 	for f in libimlua*.so; do \
 		dst=$$(echo $$f \
 			| sed 's/^lib//' \
 			| sed 's/[0-9][0-9]\.so$$/.so/'); \
-		ln -sf /usr/local/lib/$$f $(LIBDIR)/$$dst; \
+		ln -sf /usr/local/lib/$$f \
+			/usr/local/lib/lua/5.4/$$dst; \
 	done
 MAKEFILE
 

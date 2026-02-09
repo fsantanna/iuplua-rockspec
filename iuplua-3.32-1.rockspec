@@ -41,7 +41,4 @@ build = {
     type = "make",
     build_command = ":",
     install_target = "install",
-    variables = {
-        LIBDIR = "$(LIBDIR)",
-    },
 }
